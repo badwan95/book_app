@@ -80,8 +80,8 @@ function BookList (data){
   }
   this.title = data.volumeInfo.title;
 
-  if (data.volumeInfo.imageLinks.thumbnail === undefined){
-    data.volumeInfo.imageLinks.thumbnail = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png';
+  if (data.volumeInfo.imageLinks === undefined){
+    data.volumeInfo = {imageLinks:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png'};;
   }
   this.pic = data.volumeInfo.imageLinks.thumbnail;
 
