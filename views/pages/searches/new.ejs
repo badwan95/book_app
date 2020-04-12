@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search for books</title>
+    <link rel="stylesheet" href="/styles/base.css">
+</head>
+<body>
+    <aside>
+        <form action="/booksearch" method="POST">
+            <span>Search</span>
+            <input type="text" name="search" required>
+            <input type="radio" name="condition" value="title" required>
+            <span>By Title</span>
+            <input type="radio" name="condition" value="author" required>
+            <span>By Author</span>
+            <button>Search</button>
+        </form>
+    </aside>
+    
+</body>
+</html>
