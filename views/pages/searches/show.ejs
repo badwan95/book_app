@@ -4,8 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
+    <link rel="stylesheet" href="/styles/base.css">
 </head>
 <body>
-    <header>Search results</header>
+    <header>Best Books!</header>
+    <main>
+        <h2>Search Results</h2>
+        <% theList.forEach(value=>{%>
+            <div class="bookListing">
+                <img src="<%=value.pic%>">
+                <p class="p1"><%=value.title%></p>
+                <p class="p2"><%=value.author%></p>
+                <p class="p3"><%=value.description%></p>
+            </div>
+        <%}) %>
+    </main>
 </body>
 </html>

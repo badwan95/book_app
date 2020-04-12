@@ -20,14 +20,12 @@ app.get('/',(req,res)=>{
   res.render('./pages/index');
 });
 
-app.get('/')
-
 
 app.get('/test',(req,res)=>{
   res.render('./pages/searches/new');
 })
 
-app.get('/book',(req,res)=>{
+app.get('/searches/new',(req,res)=>{
   res.render('./pages/searches/new')
 })
 
@@ -42,9 +40,14 @@ function bookRetriever(req,res){
     let URL = `https://www.googleapis.com/books/v1/volumes?q=${req.body.search}&intitle=${req.body.search}`;
     superagent(URL)
     .then(result=>{
-      console.log(result.body.items[1]);
-    });
-    res.render('./pages/searches/show');
+      let bookResults = result.body.items;
+      let theList = bookResults.map(value=>{
+        console.log(value)
+        return new BookList(value);
+      });
+      res.render('./pages/searches/show',{theList: theList});
+    })
+    .catch(err=>errorHandler(err,request,response));
   } else if (req.body.condition === 'author'){
     console.log('search by author')
     let URL = `https://www.googleapis.com/books/v1/volumes?q=${req.body.search}&inauthor=${req.body.search}`;
@@ -52,33 +55,49 @@ function bookRetriever(req,res){
     .then(result=>{
       let bookResults = result.body.items;
       let theList = bookResults.map(value=>{
-        if (value.volumeInfo.description === undefined){
-          value.volumeInfo.description = 'No Description Available';
-        }
+        console.log(value)
         return new BookList(value);
-      })
-
-      console.log(theList);
-
-    });
-    res.render('./pages/searches/show');
+      });
+      res.render('./pages/searches/show',{theList: theList});
+    })
+    .catch(error=>errorHandler(error,req,res));
   }
 }
 
 
+function errorHandler (error,request,response){
+  response.render('./pages/error',{error: error});
+}
+
+app.get('*',(req,res)=>{
+  res.status(404).send('Error 404: URL Not found.')
+})
 // Constructor Function
-/* 
-we need picture of book, book title, author name and description
-picture book is bookresult.volumeInfo.imageLinks.thumbnail
-book title is bookresults.volumeInfo.title
-author name bookresults.volumeInfo.authors[0]
-*/
+
 function BookList (data){
+  if (data.volumeInfo.title === undefined){
+    data.volumeInfo.title = 'No Title Available';
+  }
   this.title = data.volumeInfo.title;
+
+  if (data.volumeInfo.imageLinks.thumbnail === undefined){
+    data.volumeInfo.imageLinks.thumbnail = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png';
+  }
   this.pic = data.volumeInfo.imageLinks.thumbnail;
+
+  if (data.volumeInfo.authors === undefined){
+
+    data.volumeInfo.authors = ['No Author name Available'];
+  }
   this.author = data.volumeInfo.authors[0];
+
+  if (data.volumeInfo.description === undefined){
+    data.volumeInfo.description = 'No Description Available';
+  }
   this.description = data.volumeInfo.description;
 }
+
+app.use(errorHandler);
 
 
 app.listen(PORT,()=>{console.log(`Server is up and running on port ${PORT}`)});
