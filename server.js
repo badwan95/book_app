@@ -7,6 +7,9 @@ const express = require('express');
 const superagent = require('superagent');
 const PORT = process.env.PORT || 4000;
 const app = express();
+const pg = require('pg');
+const client = new pg.Client(process.env.DATABASE_URL);
+client.on('error', (err) => console.log(err));
 
 // Setting up the view engine and the pages
 app.set('view engine','ejs');
@@ -16,10 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./public'))
 
 // To get links and paths
-app.get('/',(req,res)=>{
-  res.render('./pages/index');
-});
-
+app.get('/',homeHandler);
+app.get('/books/:id',bookDetails)
 
 app.get('/test',(req,res)=>{
   res.render('./pages/searches/new');
@@ -33,6 +34,28 @@ app.post('/booksearch',bookRetriever)
 
 
 // Functions for the paths
+
+function bookDetails(req,res){
+  const SQL = 'SELECT * FROM tasks WHERE id=$1;';
+  const values = [req.params.id]
+  client.query(SQL,values).then(results=>{
+    res.render('')
+  })
+}
+
+function homeHandler(req,res){
+  const SQL = 'SELECT * FROM books';
+  client.query(SQL)
+  .then(results=>{
+    console.log(results.rows);
+    res.render('./pages/index',{bookResults: results.rows});
+  })
+}
+
+
+
+
+
 function bookRetriever(req,res){
   console.log('this is what we are getting', req.body);
   if(req.body.condition === 'title'){
@@ -45,7 +68,7 @@ function bookRetriever(req,res){
         console.log(value)
         return new BookList(value);
       });
-      res.render('./pages/searches/show',{theList: theList});
+      res.render('./pages/searches/search',{theList: theList});
     })
     .catch(err=>errorHandler(err,request,response));
   } else if (req.body.condition === 'author'){
@@ -58,7 +81,7 @@ function bookRetriever(req,res){
         console.log(value)
         return new BookList(value);
       });
-      res.render('./pages/searches/show',{theList: theList});
+      res.render('./pages/searches/search',{theList: theList});
     })
     .catch(error=>errorHandler(error,req,res));
   }
@@ -100,4 +123,6 @@ function BookList (data){
 app.use(errorHandler);
 
 
-app.listen(PORT,()=>{console.log(`Server is up and running on port ${PORT}`)});
+client.connect().then(() => {
+  app.listen(PORT, () => console.log(`Server is up and running on port ${PORT}`));
+}).catch(err=> errorHandler(err,request,response));

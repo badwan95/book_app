@@ -9,5 +9,18 @@
 <body>
     <header>Hello world!</header>
     <h2>Go to search page <a href="/searches/new">here</a></h2>
+    <main>
+        <section>
+            <% bookResults.forEach(value=>{%>
+                <article>
+                    <img src="<%=value.thumbnail%>">
+                    <p><%=value.title%></p>
+                    <p><%=value.author%></p>
+                    <p><%=value.description%></p>
+                    <a href="/books/<%=value.id%>">View Details</a>
+                </article>
+            <%})%>
+        </section>
+    </main>
 </body>
 </html>

@@ -1,0 +1,1 @@
+INSERT INTO books (title,author,thumbnail,description) VALUES ('Book Title','Author Name','https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png','This is the books description');
