@@ -1,7 +1,12 @@
+
 body{
     background-color: aqua;
 }
+header{
+    background-color: black;
+    color:white;
+    min-width: 100vw;
+}
 .hamburger{
-    height: 20px;
-    width: 20px;
+
 }

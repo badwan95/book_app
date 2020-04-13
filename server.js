@@ -112,7 +112,7 @@ function BookList (data){
   this.title = data.volumeInfo.title;
 
   if (data.volumeInfo.imageLinks === undefined){
-    this.pic = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png';
+    this.pic = 'https://i.imgur.com/uSgLt7D.png';
   } else {this.pic = data.volumeInfo.imageLinks.thumbnail;}
   
   if (data.volumeInfo.authors === undefined){
