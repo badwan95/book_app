@@ -1,0 +1,1 @@
+INSERT INTO books (title,author,thumbnail,description,isbn,bookshelf) VALUES ('Book Title','Author Name','https://i.imgur.com/uSgLt7D.png','This is the books description','123456789','TheShelf');

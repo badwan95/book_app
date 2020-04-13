@@ -1,13 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Collection</title>
-    <link rel="stylesheet" href="/styles/base.css">
+    <%-include('./layout/head')%>
 </head>
 <body>
-    <header>Hello world!</header>
-    <h2>Go to search page <a href="/searches/new">here</a></h2>
+    <%-include('./layout/header')%>
+    <h2>Go to search page <a href="/searches/new">here</a></h2> 
+    <h3>The count for the current books in storage: <%=bookResults.length%></h3>   
+    <main>
+        <section>
+            <% bookResults.forEach(value=>{%>
+                <article>
+                    <img src="<%=value.thumbnail%>">
+                    <p><%=value.title%></p>
+                    <p><%=value.author%></p>
+                    <p><%=value.description%></p>
+                    <a href="/books/<%=value.id%>">View Details</a>
+                </article>
+            <%})%>
+        </section>
+    </main>
 </body>
 </html>

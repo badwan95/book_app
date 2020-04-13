@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%-include('../layout/head')%>
+</head>
+<body>
+    <%-include('../layout/header')%>
+    <main>
+        <h2>Search Results</h2>
+        <% theList.forEach(value=>{%>
+            <div class="bookListing">
+                <img src="<%=value.pic%>">
+                <p class="p1"><%=value.title%></p>
+                <p class="p2"><%=value.author%></p>
+                <p class="p3"><%=value.description%></p>
+                <form action="/books" method="POST">
+                    <input type="hidden" name="title" value="<%=value.title%>">
+                    <input type="hidden" name="author" value="<%=value.author%>">
+                    <input type="hidden" name="description" value="<%=value.description%>">
+                    <input type="hidden" name="isbn" value="<%=value.isbn%>">
+                    <input type="hidden" name="pic" value="<%=value.pic%>">
+                    <input type="text" name="bookshelf" value="BookshelfName">
+                    <button>Add book to shelf</button>
+                </form>
+            </div>
+        <%}) %>
+    </main>
+</body>
+</html>

@@ -1,7 +1,7 @@
 # Project Name: Book App
 
 **Author**: Ammar Badwan
-**Version**: 1.0.0
+**Version**: 2.0.0
 
 ## Overview
 
@@ -18,6 +18,7 @@ We will build both front end and back end using the server commands by utilizing
 ## Change Log
 
 13/4/2020 2:10 AM Finished the API functionality
+14/4/2020 2:03 AM Finished database,partials and the book collection view with details to every book.
 
 ## Number and name of feature:#1: Set up
 
@@ -39,3 +40,32 @@ Finish time: 6:00 pm and 2 am
 
 Actual time needed to complete: 5 hours.
 
+## Number and name of feature:#3: Having all collection books in the same page
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 2:00 pm
+
+Finish time: 3:00 pm
+
+Actual time needed to complete: 1 hours.
+
+## Number and name of feature:#4: Saving book collection to database and showing each items details on a specific page
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 3:00 pm
+
+Finish time: 6:00 pm
+
+Actual time needed to complete: 3 hours.
+
+## Number and name of feature:#5: Using partials for the head,header and footer
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 1:00 am
+
+Finish time: 2:00 am
+
+Actual time needed to complete: 1 hour.
