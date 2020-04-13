@@ -5,7 +5,8 @@
 </head>
 <body>
     <%-include('./layout/header')%>
-    <h2>Go to search page <a href="/searches/new">here</a></h2>    
+    <h2>Go to search page <a href="/searches/new">here</a></h2> 
+    <h3>The count for the current books in storage: <%=bookResults.length%></h3>   
     <main>
         <section>
             <% bookResults.forEach(value=>{%>
