@@ -1,3 +1,7 @@
 body{
     background-color: aqua;
 }
+.hamburger{
+    height: 20px;
+    width: 20px;
+}

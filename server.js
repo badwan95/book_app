@@ -30,26 +30,39 @@ app.get('/searches/new',(req,res)=>{
   res.render('./pages/searches/new')
 })
 
-app.post('/booksearch',bookRetriever)
+app.post('/books',addingBook)
+
+app.post('/search',bookRetriever)
 
 
 // Functions for the paths
 
+function addingBook(req,res){
+  const SQL = 'INSERT INTO books (title,author,thumbnail,description,isbn,bookshelf) VALUES ($1,$2,$3,$4,$5,$6)';
+  const {title,author,pic,description,isbn,bookshelf} = req.body;
+  const values = [title,author,pic,description,isbn,bookshelf];
+  client.query(SQL,values)
+  .then(results=>{
+    res.redirect('/');
+  }).catch(err=>errorHandler(err,req,res))
+}
+
 function bookDetails(req,res){
-  const SQL = 'SELECT * FROM tasks WHERE id=$1;';
+  const SQL = 'SELECT * FROM books WHERE id=$1;';
   const values = [req.params.id]
   client.query(SQL,values).then(results=>{
-    res.render('')
+    res.render('pages/books/show',{result:results.rows[0]})
   })
+  .catch(error=>errorHandler(error,req,res))
 }
 
 function homeHandler(req,res){
   const SQL = 'SELECT * FROM books';
   client.query(SQL)
   .then(results=>{
-    console.log(results.rows);
     res.render('./pages/index',{bookResults: results.rows});
   })
+  .catch(error=>errorHandler(error,req,res))
 }
 
 
@@ -57,28 +70,23 @@ function homeHandler(req,res){
 
 
 function bookRetriever(req,res){
-  console.log('this is what we are getting', req.body);
   if(req.body.condition === 'title'){
-    console.log('search by title')
     let URL = `https://www.googleapis.com/books/v1/volumes?q=${req.body.search}&intitle=${req.body.search}`;
     superagent(URL)
     .then(result=>{
       let bookResults = result.body.items;
-      let theList = bookResults.map(value=>{
-        console.log(value)
+      let theList = bookResults.map((value)=>{
         return new BookList(value);
       });
       res.render('./pages/searches/search',{theList: theList});
     })
     .catch(err=>errorHandler(err,request,response));
   } else if (req.body.condition === 'author'){
-    console.log('search by author')
     let URL = `https://www.googleapis.com/books/v1/volumes?q=${req.body.search}&inauthor=${req.body.search}`;
     superagent(URL)
     .then(result=>{
       let bookResults = result.body.items;
       let theList = bookResults.map(value=>{
-        console.log(value)
         return new BookList(value);
       });
       res.render('./pages/searches/search',{theList: theList});
@@ -104,10 +112,9 @@ function BookList (data){
   this.title = data.volumeInfo.title;
 
   if (data.volumeInfo.imageLinks === undefined){
-    data.volumeInfo = {imageLinks:'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png'};;
-  }
-  this.pic = data.volumeInfo.imageLinks.thumbnail;
-
+    this.pic = 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Placeholder_book.svg/792px-Placeholder_book.svg.png';
+  } else {this.pic = data.volumeInfo.imageLinks.thumbnail;}
+  
   if (data.volumeInfo.authors === undefined){
 
     data.volumeInfo.authors = ['No Author name Available'];
@@ -118,6 +125,14 @@ function BookList (data){
     data.volumeInfo.description = 'No Description Available';
   }
   this.description = data.volumeInfo.description;
+
+  if (data.volumeInfo.industryIdentifiers === undefined){
+    this.isbn ='No ISBN available.';
+  }else {
+    this.isbn = data.volumeInfo.industryIdentifiers[0].identifier
+  }
+
+
 }
 
 app.use(errorHandler);
