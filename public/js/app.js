@@ -4,5 +4,8 @@ $(document).ready(function() {
     console.log('hi from jQuery');
     $('#updateButton').click(()=>{
         $('.updateForm').toggle();
-    })
+    });
+    $('#deletingButton').click(()=>{
+        $('.deleteForm').toggle();
+    });
 });

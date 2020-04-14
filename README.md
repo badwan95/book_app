@@ -1,7 +1,7 @@
 # Project Name: Book App
 
 **Author**: Ammar Badwan
-**Version**: 2.0.0
+**Version**: 3.0.0
 
 ## Overview
 
@@ -19,6 +19,7 @@ We will build both front end and back end using the server commands by utilizing
 
 13/4/2020 2:10 AM Finished the API functionality
 14/4/2020 2:03 AM Finished database,partials and the book collection view with details to every book.
+14/4/2020 6:00 PM Finished update and delete options and added some css
 
 ## Number and name of feature:#1: Set up
 
@@ -69,3 +70,13 @@ Start time: 1:00 am
 Finish time: 2:00 am
 
 Actual time needed to complete: 1 hour.
+
+## Number and name of feature:#6: Added the option to delete or update a book from database
+
+Estimate of time needed to complete: 2 hours
+
+Start time: 2:00 PM
+
+Finish time: 6:00 PM
+
+Actual time needed to complete: 4 hours.
