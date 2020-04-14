@@ -1,9 +1,80 @@
 
 body{
-    background-color: aqua;
+    background-color: #9B9B9B;
 }
 header{
     background-color: black;
     color:white;
     min-width: 100vw;
+}
+section{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+h3{
+    background-color: rgb(87, 87, 87);
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: rgb(231, 231, 231);
+}
+.bookCount{
+    padding: 0 5px;
+    margin: 0 10px;
+    color: rgb(49, 49, 49);
+    background-color: white;
+    border-radius: 50%;
+    font-weight: bold;
+}
+
+
+article div{
+    margin: 20px 0;
+    width: 80vw;
+    background-color: rgb(201, 201, 201);
+    padding: 20px 0;
+    border-radius: 4px;
+    box-shadow: 0 0 10px 10px #888888;
+}
+article div>*{
+    margin: 0 auto;
+    text-align: center;
+}
+article div img{
+    width: 50%;
+    margin: 0 auto;
+    border: 3px solid white;
+}
+.title{
+    color: white;
+    text-shadow: 1px 1px 1px #000000;
+    margin-top: 10px;
+    font-size: 24px;
+}
+.author{
+    color: darkslategrey;
+    font-style: italic;
+    margin: 10px 0 20px 0;
+    font-size: 16px;
+}
+.description{
+    width: 90%;
+}
+.viewDetailsBtn{
+    margin: 40px 0;
+}
+.viewDetailsBtn a{
+    padding: 20px 70px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+
+.updateForm{
+    display: none;
 }

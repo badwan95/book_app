@@ -1,0 +1,13 @@
+<button type="button" id="updateButton">Update Details</button>
+<form action="/update/<%=result.id%>?_method=PUT" method="POST" class="updateForm">
+    <input type="text" name="title" value="<%=result.title%>">
+    <input type="text" name="author" value="<%=result.author%>">
+    <input type="text" name="description" value="<%=result.description%>">
+    <input type="text" name="isbn" value="<%=result.isbn%>">
+    <input type="text" name="pic" value="<%=result.thumbnail%>">
+    <input type="text" name="bookshelf" value="<%=result.bookshelf%>">
+    <button>Update Book</button>
+</form>
+<form action="/delete/<%=result.id%>?_method=DELETE" method="POST">
+    <button>Delete Book</button>
+</form>
