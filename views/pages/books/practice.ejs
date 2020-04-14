@@ -1,0 +1,24 @@
+<%let action = '/update/<%=result.id%>?_method=PUT';
+let word = 'Update';
+let class="updateForm";
+let type = "text";
+let buttonId = "updateButton";
+if (formAction === 'DELETE'){
+  word = 'Delete';
+  action = '/delete/<%=result.id%>?_method=DELETE';
+  class = "deleteForm";
+  type = 'hidden';
+  buttonId = 'deletingButton';
+}; %>
+
+<button type="button" class="<%=class%>" id="<%=buttonId%>"> <%=word%> Details</button>
+
+<form action=" <%=action%> " method="POST" class="<%=class%>">
+    <input type="<%=type%>" name="title" value="<%=result.title%>">
+    <input type="<%=type%>" name="author" value="<%=result.author%>">
+    <input type="<%=type%>" name="description" value="<%=result.description%>">
+    <input type="<%=type%>" name="isbn" value="<%=result.isbn%>">
+    <input type="<%=type%>" name="pic" value="<%=result.thumbnail%>">
+    <input type="<%=type%>" name="bookshelf" value="<%=result.bookshelf%>">
+    <button> <%=word%> Book</button>
+</form>
