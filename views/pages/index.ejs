@@ -5,20 +5,28 @@
 </head>
 <body>
     <%-include('./layout/header')%>
+    <h3> <span class="bookCount"><%=bookResults.length%></span> Saved books</h3>   
     <h2>Go to search page <a href="/searches/new">here</a></h2> 
-    <h3>The count for the current books in storage: <%=bookResults.length%></h3>   
     <main>
         <section>
             <% bookResults.forEach(value=>{%>
                 <article>
-                    <img src="<%=value.thumbnail%>">
-                    <p><%=value.title%></p>
-                    <p><%=value.author%></p>
-                    <p><%=value.description%></p>
-                    <a href="/books/<%=value.id%>">View Details</a>
+                    <div>
+                        <p><img src="<%=value.thumbnail%>"></p>
+                        <p class="title"><%=value.title%></p>
+                        <p class="author"><%=value.author%></p>
+                        <!-- <p class="description"><%=value.description%></p> -->
+                        <p class="viewDetailsBtn"><a href="/books/<%=value.id%>">View Details</a></p>
+                    </div>
                 </article>
             <%})%>
         </section>
     </main>
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.js"
+  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+  crossorigin="anonymous"></script>
+  <script src="/js/app.js"></script>
+
 </body>
 </html>
